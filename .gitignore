@@ -6,3 +6,5 @@ datasets
 *.log
 *.pt
 *.zip
+
+code/baselines/*/data/**

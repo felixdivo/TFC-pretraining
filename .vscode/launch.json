@@ -4,7 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "Data processing SimCLR",
             "type": "python",
@@ -31,10 +30,14 @@
             "env": {
                 "PYTHONPATH": "${cwd}"
             },
+            "args": [
+                "--training_mode",
+                "pre_train"
+            ],
             "justMyCode": true
         },
-{
-            "name": "SleepECG2Epilepsy Fine Tune",
+        {
+            "name": "SleepECG2 -> Epilepsy Fine Tune",
             "type": "python",
             "request": "launch",
             "program": "main.py",
@@ -43,7 +46,10 @@
             "env": {
                 "PYTHONPATH": "${cwd}"
             },
-            "args": ["--training_mode", "fine_tune_test"],
+            "args": [
+                "--training_mode",
+                "fine_tune_test"
+            ],
             "justMyCode": true
         }
     ]
