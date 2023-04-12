@@ -11,7 +11,6 @@ from trainer import Trainer
 from rtpt import RTPT
 
 
-
 # Args selections
 start_time = datetime.now()
 parser = argparse.ArgumentParser()
