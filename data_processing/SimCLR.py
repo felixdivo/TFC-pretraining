@@ -2,7 +2,7 @@ import torch
 import numpy as np
 import os
 
-dataset_lst = ['SleepEEG', 'Epilepsy', 'FD-A', 'FD-B', 'HAR', 'Gesture', 'ecg', 'emg']
+dataset_lst = ['SleepEEG', 'Epilepsy', 'FD-A', 'FD-B', 'HAR', 'Gesture', 'ECG', 'EMG']
 n_classes_lst = [5, 2, 3, 3, 6, 8, 4, 3]
 
 def scatter_numpy(self, dim, index, src):

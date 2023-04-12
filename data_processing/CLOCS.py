@@ -4,7 +4,7 @@ import os
 import pickle
 
 alias_lst = ['sleepEDF', 'epilepsy', 'pFD_A', 'pFD_B', 'HAR', 'AHAR', 'physionet2017', 'emg']
-dirname_lst = ['SleepEEG', 'Epilepsy', 'FD-A', 'FD-B', 'HAR', 'Gesture', 'ecg', 'emg']
+dirname_lst = ['SleepEEG', 'Epilepsy', 'FD-A', 'FD-B', 'HAR', 'Gesture', 'ECG', 'EMG']
 trial_lst = ['contrastive_ms', 'contrastive_ss', 'contrastive_ms', 'contrastive_ss', 'contrastive_ms', 'contrastive_ss', 'contrastive_ms', 'contrastive_ss']
 phase_lst = ['train','val','test']
 modality_lst = ['eeg', 'eeg', 'other', 'other', 'other', 'other', 'ecg', 'emg']
