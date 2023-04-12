@@ -1,0 +1,50 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Data processing SimCLR",
+            "type": "python",
+            "request": "launch",
+            "program": "data_processing/SimCLR.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Data processing Mixing Up",
+            "type": "python",
+            "request": "launch",
+            "program": "data_processing/Mixing-up.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "SleepECG Pre Train",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/code/TFC",
+            "env": {
+                "PYTHONPATH": "${cwd}"
+            },
+            "justMyCode": true
+        },
+{
+            "name": "SleepECG2Epilepsy Fine Tune",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/code/TFC",
+            "env": {
+                "PYTHONPATH": "${cwd}"
+            },
+            "args": ["--training_mode", "fine_tune_test"],
+            "justMyCode": true
+        }
+    ]
+}

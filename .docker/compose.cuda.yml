@@ -1,0 +1,9 @@
+services:
+  tfc_pretraining:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]

@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  tfc_pretraining:
+    build:
+      context: ..
+      dockerfile: ./.docker/Dockerfile
+      args:
+        - COMPOSE_PROJ_NAME=${COMPOSE_PROJ_NAME}
+        - KIND=3.10
+    environment:
+      - DISPLAY=$DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ..:/workspaces/${COMPOSE_PROJ_NAME}
+      # - $HOME/.wandb_secret:/workspaces/timeseries_vit/.env:ro
+    stdin_open: true # docker run -i
+    tty: true # docker run -t

@@ -1,0 +1,31 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+  "name": "TFC_PRETRAINING",
+  "build": {
+    "dockerfile": "../.docker/Dockerfile",
+    "context": "..",
+    "args": {
+      "COMPOSE_PROJ_NAME": "tfc_pretraining",
+      "KIND": "3.10"
+    }
+  },
+  // "settings": {
+  //   "terminal.integrated.defaultProfile.linux": "zsh"
+  // },
+  "remote.containers.copyGitConfig": true,
+  "remoteUser": "root", // More info: https://aka.ms/dev-containers-non-root
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "bungcip.better-toml",
+        "github.copilot"
+      ]
+    }
+  },
+  "runArgs": [
+    "--gpus",
+    "device=0"
+  ]
+}

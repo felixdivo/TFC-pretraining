@@ -1,0 +1,11 @@
+services:
+  tfc_pretraining:
+    build:
+      args:
+        - KIND=dev-3.10
+    volumes:
+      # - /tmp/.X11-unix:/tmp/.X11-unix
+      # - ..:/workspaces/${COMPOSE_PROJ_NAME}
+      # - $HOME/.wandb_secret:/workspaces/${COMPOSE_PROJ_NAME}/.env:ro
+      - ~/.config/nvim/init.lua:/root/.config/nvim/init.lua:ro
+      - ~/.config/nvim/lua/:/root/.config/nvim/lua:ro
