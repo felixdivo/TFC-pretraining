@@ -462,7 +462,7 @@ def model_test(
                     multi_class="ovr",
                 )
             except:
-                auc_bs = np.float(0)
+                auc_bs = 0.0
             prc_bs = average_precision_score(
                 onehot_label.detach().cpu().numpy(), pred_numpy, average="macro"
             )
