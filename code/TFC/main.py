@@ -127,8 +127,8 @@ logger.debug("Data loaded ...")
 
 
 rtpt = RTPT(
-    name_initials="MK",
-    experiment_name=f'TFDC-{args.training_mode}-{args.pretrain_dataset}{f"2{args.target_dataset}"if args.training_mode == "fine_tune_test" else ""}',
+    name_initials="MK_FD",
+    experiment_name=f'TFC-{args.model}-{args.training_mode}-{args.pretrain_dataset}{f"2{args.target_dataset}"if args.training_mode == "fine_tune_test" else ""}',
     max_iterations=configs.num_epoch,
 )
 # Load Model
@@ -143,8 +143,6 @@ elif args.model == "New-Transformer":
 else:
     raise NotImplementedError(f"Model {args.model} is not implemented.")
 # Log information on the model
-print()  # newline
-print(f"The model being used:\n{TFC_model}")
 print()  # newline
 in_data = next(iter(train_dl))  # See trainer for an interpretation of the list
 summary(TFC_model, input_data=[in_data[0], in_data[3]], device=device)
