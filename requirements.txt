@@ -4,4 +4,5 @@ scikit-learn
 pandas
 rtpt
 tqdm
+torchinfo
 black

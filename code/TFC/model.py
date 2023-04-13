@@ -5,7 +5,7 @@ from torch.nn import TransformerEncoder, TransformerEncoderLayer
 
 class TFC(nn.Module):
     def __init__(self, configs):
-        super(TFC, self).__init__()
+        super().__init__()
 
         encoder_layers_t = TransformerEncoderLayer(
             configs.TSlength_aligned,
@@ -112,7 +112,7 @@ class SingleProjector(nn.Sequential):
 
 class TFC_Original(nn.Module):  # Frequency domain encoder
     def __init__(self, configs):
-        super(TFC, self).__init__()
+        super().__init__()
 
         self.conv_backbone_time = SingleConvBackbone(configs)
         self.conv_backbone_freq = SingleConvBackbone(configs)
@@ -140,7 +140,7 @@ class target_classifier(nn.Module):
     """Downstream classifier only used in finetuning"""
 
     def __init__(self, configs):
-        super(target_classifier, self).__init__()
+        super().__init__()
         self.logits = nn.Linear(2 * 128, 64)
         self.logits_simple = nn.Linear(64, configs.num_classes_target)
 

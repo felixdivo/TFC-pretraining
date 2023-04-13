@@ -16,7 +16,7 @@ class Config(object):
 
         self.TSlength_aligned = 178
 
-        self.CNNoutput_channel = 10 # 90 # 10 for Epilepsy model
+        self.CNNoutput_channel = 5 # 90 # 10 for Epilepsy model
 
         # training configs
         self.num_epoch = 40
