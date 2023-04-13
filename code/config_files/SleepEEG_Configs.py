@@ -9,9 +9,8 @@ class Config(object):
         self.num_classes_target = 2
         self.dropout = 0.35
 
-
-        self.kernel_size = 25
-        self.stride = 3
+        self.kernel_size = 8
+        self.stride = 8
         self.features_len = 127
         self.features_len_f = self.features_len
 
@@ -22,17 +21,16 @@ class Config(object):
         # training configs
         self.num_epoch = 40
 
-
         # optimizer parameters
         self.optimizer = 'adam'
         self.beta1 = 0.9
         self.beta2 = 0.99
-        self.lr = 3e-4 # 3e-4
+        self.lr = 3e-4
         self.lr_f = self.lr
 
         # data parameters
         self.drop_last = True
-        self.batch_size = 128
+        self.batch_size = 64
         """For Epilepsy, the target batchsize is 60"""
         self.target_batch_size = 60   # the size of target dataset (the # of samples used to fine-tune).
 

@@ -62,7 +62,9 @@ training_mode = args.training_mode
 run_description = args.run_description
 logs_save_dir = args.logs_save_dir
 os.makedirs(logs_save_dir, exist_ok=True)
-exec(f'from config_files.{pretrain_dataset.replace("-","_")}_Configs import Config as Configs')
+import_config =f'from config_files.{pretrain_dataset.replace("-","_")}_Configs import Config as Configs'
+exec(import_config)
+print(f"importing config: {import_config}")
 configs = Configs()
 
 # # ##### fix random seeds for reproducibility ########
@@ -126,8 +128,8 @@ if training_mode == "fine_tune_test":
     pretrained_dict = chkpoint["model_state_dict"]
     TFC_model.load_state_dict(pretrained_dict)
 
-model_optimizer = torch.optim.Adam(TFC_model.parameters(), lr=configs.lr, betas=(configs.beta1, configs.beta2), weight_decay=3e-4)
-classifier_optimizer = torch.optim.Adam(classifier.parameters(), lr=configs.lr, betas=(configs.beta1, configs.beta2), weight_decay=3e-4)
+model_optimizer = torch.optim.Adam(TFC_model.parameters(), lr=configs.lr, betas=(configs.beta1, configs.beta2), weight_decay=5e-4)
+classifier_optimizer = torch.optim.Adam(classifier.parameters(), lr=configs.lr, betas=(configs.beta1, configs.beta2), weight_decay=5e-4)
 
 # Trainer
 Trainer(TFC_model, model_optimizer, classifier, classifier_optimizer, train_dl, valid_dl, test_dl, device,
