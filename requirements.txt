@@ -3,3 +3,5 @@ torchaudio
 scikit-learn
 pandas
 rtpt
+tqdm
+black

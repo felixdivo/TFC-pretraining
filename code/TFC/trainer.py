@@ -17,6 +17,8 @@ from sklearn.metrics import (
 from sklearn.neighbors import KNeighborsClassifier
 from model import *
 
+from tqdm import tqdm
+
 
 def one_hot_encoding(X):
     X = [int(x) for x in X]
@@ -220,7 +222,9 @@ def model_pretrain(
     # optimizer
     model_optimizer.zero_grad()
 
-    for batch_idx, (data, labels, aug1, data_f, aug1_f) in enumerate(train_loader):
+    for batch_idx, (data, labels, aug1, data_f, aug1_f) in enumerate(
+        tqdm(train_loader, unit="batches")
+    ):
         data, labels = data.float().to(device), labels.long().to(
             device
         )  # data: [128, 1, 178], labels: [128]
@@ -251,10 +255,12 @@ def model_pretrain(
             nt_xent_criterion(z_t_aug, z_f),
             nt_xent_criterion(z_t_aug, z_f_aug),
         )
+
+        # TODO: this is unused!
         loss_c = (1 + l_TF - l_1) + (1 + l_TF - l_2) + (1 + l_TF - l_3)
 
         lam = 0.2
-        loss = lam * (loss_t + loss_f) + l_TF #(1-lam)*loss_c #l_TF
+        loss = lam * (loss_t + loss_f) + l_TF  # (1-lam)*loss_c #l_TF
 
         total_loss.append(loss.item())
         loss.backward()
