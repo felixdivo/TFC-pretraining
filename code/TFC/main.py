@@ -37,6 +37,11 @@ parser.add_argument('--device_id', default='0', type=int,
                     help='cuda device id')
 parser.add_argument('--home_path', default=home_dir, type=str,
                     help='Project home directory')
+
+parser.add_argument('--model', default="1D-ResNet-from-paper", type=str,
+                    choices=["1D-ResNet-from-paper", "New-Transformer"],
+                    help='The model to use as a backbone')
+
 args, unknown = parser.parse_known_args()
 
 with_gpu = torch.cuda.is_available()
@@ -102,10 +107,15 @@ rtpt = RTPT(name_initials='MK', experiment_name=f'TFDC-{args.training_mode}-{arg
 rtpt.start()
 
 """Here are two models, one basemodel, another is temporal contrastive model"""
-TFC_model = TFC(configs).to(device)
+if args.model == "1D-ResNet-from-paper":
+    TFC_model = TFC(configs).to(device)
+elif args.model == "New-Transformer":
+    TFC_model = TFC_Original(configs)
+else:
+    raise NotImplementedError(f"Model {args.model} is not implemented.")
+# Configure:
+TFC_model = TFC_model.to(device)
 classifier = target_classifier(configs).to(device)
-temporal_contr_model = None
-
 
 if training_mode == "fine_tune_test":
     # load saved model of this experiment
