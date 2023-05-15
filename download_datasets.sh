@@ -33,8 +33,3 @@ rm HAR.zip
 rm Gesture.zip
 rm ECG.zip
 rm EMG.zip
-
-
-
-
-

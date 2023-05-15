@@ -37,7 +37,7 @@
             "justMyCode": true
         },
         {
-            "name": "SleepECG2 -> Epilepsy Fine Tune",
+            "name": "SleepECG -> Epilepsy Fine Tune",
             "type": "python",
             "request": "launch",
             "program": "main.py",

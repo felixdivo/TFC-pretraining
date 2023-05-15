@@ -18,6 +18,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from model import *
 
 from tqdm import tqdm
+from torch.nn import functional as F
 
 
 def one_hot_encoding(X):
@@ -102,6 +103,7 @@ def Trainer(
             )
             scheduler.step(valid_loss)
             rtpt.step(subtitle=f"loss={valid_loss:2.2f}")
+            # print(model_optimizer.param_groups[0]['lr'])
 
             # save best fine-tuning model""
             global arch
@@ -339,11 +341,12 @@ def model_finetune(
         loss_p = criterion(predictions, labels)
 
         lam = 0.1
-        loss = loss_p + l_TF + lam * (loss_t + loss_f)
+        loss = loss_p # + l_TF + lam * (loss_t + loss_f)
 
-        acc_bs = labels.eq(predictions.detach().argmax(dim=1)).float().mean()
+        predictions_softmax = F.softmax(predictions.detach(), dim=1)
+        acc_bs = labels.eq(predictions_softmax.argmax(dim=1)).float().mean()
         onehot_label = F.one_hot(labels)
-        pred_numpy = predictions.detach().cpu().numpy()
+        pred_numpy = predictions_softmax.detach().cpu().numpy()
 
         try:
             auc_bs = roc_auc_score(
@@ -367,7 +370,7 @@ def model_finetune(
         classifier_optimizer.step()
 
         if training_mode != "pre_train":
-            pred = predictions.max(1, keepdim=True)[
+            pred = predictions_softmax.max(1, keepdim=True)[
                 1
             ]  # get the index of the max log-probability
             outs = np.append(outs, pred.cpu().numpy())
@@ -450,9 +453,11 @@ def model_test(
             emb_test_all.append(fea_concat_flat)
 
             loss = criterion(predictions_test, labels)
-            acc_bs = labels.eq(predictions_test.detach().argmax(dim=1)).float().mean()
+
+            predictions_test_softmax = F.softmax(predictions_test, dim=1)
+            acc_bs = labels.eq(predictions_test_softmax.detach().argmax(dim=1)).float().mean()
             onehot_label = F.one_hot(labels)
-            pred_numpy = predictions_test.detach().cpu().numpy()
+            pred_numpy = predictions_test_softmax.detach().cpu().numpy()
             labels_numpy = labels.detach().cpu().numpy()
             try:
                 auc_bs = roc_auc_score(
@@ -473,7 +478,7 @@ def model_test(
             total_prc.append(prc_bs)
 
             total_loss.append(loss.item())
-            pred = predictions_test.max(1, keepdim=True)[
+            pred = predictions_test_softmax.max(1, keepdim=True)[
                 1
             ]  # get the index of the max log-probability
             outs = np.append(outs, pred.cpu().numpy())
